@@ -8,6 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi'
 import { LocalStrategy } from '../strategies/local.strategies';
+import { JwtStrategy } from '../strategies/jwt.strategy';
 @Module({
   /**
    * we needed to config jwtmodule with env varibles
@@ -34,6 +35,6 @@ import { LocalStrategy } from '../strategies/local.strategies';
     inject: [ConfigService],
   })],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy],
+  providers: [AuthService, LocalStrategy,JwtStrategy],
 })
 export class AuthModule {}

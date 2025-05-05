@@ -15,11 +15,12 @@ export class LocalStrategy extends PassportStrategy(Strategy){
         /**
          * anything return in this function is automatically added to the request object 
          */
-        try {
-            return this.usersService.verifyUser(email, password)
-            
-        } catch (err) {
-            throw new UnauthorizedException(err)
+            try {
+              const res= await this.usersService.verifyUser(email, password);
+              console.log(`response id: ${res._id}`)
+              return res
+            } catch (err) {
+              throw new UnauthorizedException(err);
+            }
+          }
         }
-    }
-}

@@ -5,13 +5,17 @@ import { CurrentUser } from './current-user.decorator';
 import { UserDocument } from './users/models/user.schema';
 import { Response } from 'express';
 
-@Controller()
+@Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(
-     // Inject the currently authenticated user (set by the guard)
+    /**
+     * @CurrentUser() user: UserDocument you’re telling NestJS:
+→ “Please inject the current user 
+    into this parameter, pulling it from the request context.”
+     */
        @CurrentUser() user: UserDocument,
        // Inject the Express response object, allowing passthrough so we can set cookies in http
        @Res ({passthrough: true}) response: Response,
